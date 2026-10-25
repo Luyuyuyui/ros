@@ -1,2 +1,2 @@
 # ros
-A personal learning repository covering ROS, Linux, C++, and Python — notes, demos, and practice code.
+This repository was originally created for a freshman-year training assessment, and was later extended for an innovation project focused on computer vision tasks, including target ball detection and QR code recognition.
