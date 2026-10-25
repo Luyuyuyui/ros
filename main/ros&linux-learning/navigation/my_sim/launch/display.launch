@@ -1,0 +1,23 @@
+<!-- 自定义地图+机器人 -->
+<launch>
+    <arg name="model" default="$(find my_sim)/urdf/my_robot.urdf.xacro" />
+    <arg name="world_path" default="$(find my_sim)/map/my_world/my_world.world"/>
+<!-- gazebo世界加载 -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_path)"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+    </include>
+    <!-- 机器人模型加载 -->
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <!-- 指定初始位置生成机器人 -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+          args="-param robot_description -urdf -model my_simple_bot -x -0.5 -y -3.0 -z 0.1" />
+    <!-- 发布tf变换 -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_sim)/rviz/nav.rviz" required="true" />
+</launch>

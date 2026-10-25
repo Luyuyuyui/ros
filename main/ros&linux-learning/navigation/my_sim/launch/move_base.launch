@@ -1,0 +1,32 @@
+<!-- 自定义地图和机器人实现航点导航 -->
+<launch>
+<!-- 加载机器人和地图 -->
+  <include file="$(find my_sim)/launch/display.launch" />
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find my_sim)/map/map.yaml" />
+
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="initial_pose_x" value="-0.5"/>
+    <param name="initial_pose_y" value="-3.0"/>
+    <param name="initial_pose_a" value="0.0"/>
+  </node>
+  
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="controller_frequency" value="5.0" />
+    <param name="planner_frequency" value="1.0" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    
+    <rosparam file="$(find my_sim)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find my_sim)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    
+    <rosparam file="$(find my_sim)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_sim)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_sim)/config/dwa_local_planner_params.yaml" command="load" />
+  <!-- 话题重映射 -->
+    <remap from="cmd_vel" to="/cmd_vel"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+</launch>

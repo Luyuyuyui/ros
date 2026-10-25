@@ -1,0 +1,9 @@
+# 定义Goal（客户端发送给服务器的目标）
+int32 current_id
+string direction
+---
+# 定义Result（服务器返回给客户端的结果）
+bool success
+---
+# 定义Feedback（服务器定期发送给客户端的进度反馈）
+int32 now_floor

@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="solve_t3" type="server.py" name="elevator_server" output="screen" />
+        
+    <node pkg="solve_t3" type="client.py" name="elevator_client" output="screen" />
+</launch>

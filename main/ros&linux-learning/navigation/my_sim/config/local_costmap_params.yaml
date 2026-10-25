@@ -1,0 +1,10 @@
+local_costmap:
+  global_frame: odom  # 局部代价地图使用odom坐标系
+  robot_base_frame: base_link
+
+  update_frequency: 2.0    # 每秒更新两次地图
+  publish_frequency: 1.0   # 发布频率
+  width: 2.5               
+  height: 2.5
+  resolution: 0.1
+  rolling_window: true # 随机器人移动而移动

@@ -1,0 +1,9 @@
+int32 total_files
+string[] file_paths
+---
+bool success
+string message
+---
+int32 current_file
+int32 total_files
+float32 percent_complete

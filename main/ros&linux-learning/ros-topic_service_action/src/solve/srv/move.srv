@@ -1,0 +1,8 @@
+# [请求部分 Request]
+float64 x
+float64 y
+---
+# [响应部分 Response]
+float64 x
+float64 y
+bool success

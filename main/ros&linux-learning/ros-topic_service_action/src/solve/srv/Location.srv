@@ -1,0 +1,7 @@
+# [请求部分 Request]
+string target
+---
+# [响应部分 Response]
+string name
+float64 x
+float64 y
